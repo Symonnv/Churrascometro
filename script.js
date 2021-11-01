@@ -1,27 +1,43 @@
-//Carne == 400g por pessoa --> + de 6h == 650
-//Cerveja == 1200ml por pessoa --> + 6h == 2000ml
-//Refri/Água == 1000ml por pessoa --> + 6h == 1500ml
+let qntAdultos = document.querySelector('#qntAdultos')
+let qntCriancas = document.querySelector('#qntCriancas')
+let numeroHoras = document.querySelector('#numeroHoras')
+let resultado = document.querySelector('#resultado')
 
 function Calcular() {
-  let qntAdultos = document.querySelector('#qntAdultos')
-  let qntCriancas = document.querySelector('#qntCriancas')
-  let numeroHoras = document.querySelector('#numeroHoras')
+  let adultos = qntAdultos.value
+  let criancas = qntCriancas.value
+  let duracao = numeroHoras.value
 
-  let carne
-  let cerveja
-  let agua
-
-  if (numeroHoras.value.length == 0) {
+  if (duracao.length == 0) {
     alert('Digite a quantidade de horas')
   } else {
-    if (numeroHoras.value >= 6) {
-      carne = 650 + qntAdultos.value + (650 / 2 + qntCriancas.value)
-      cerveja = 2000 + qntAdultos.value
-      agua = 1500 + qntAdultos.value + (1500 / 2 + qntCriancas.value)
-    } else {
-      carne = 400 + qntAdultos.value + (400 / 2 + qntCriancas.value)
-      cerveja = 1200 + qntAdultos.value
-      agua = 1000 + qntAdultos.value + (1000 / 2 + qntCriancas.value)
-    }
+    let qntCarne = carne(duracao) * adultos + (carne(duracao) / 2) * criancas
+    let qntCerveja = cerveja(duracao) * adultos
+    let qntAgua = agua(duracao) * adultos + (agua(duracao) / 2) * criancas
+
+    resultado.innerHTML = `<p>${qntCarne / 1000}Kg de carne</p>`
+    resultado.innerHTML += `<p>${Math.ceil(qntCerveja / 355)} latas de cerveja</p>`
+    resultado.innerHTML += `<p>${Math.ceil(qntAgua / 2000)} garrafas de água</p>`
+  }
+}
+function carne(duracao) {
+  if (duracao >= 6) {
+    return 650
+  } else {
+    return 400
+  }
+}
+function cerveja(duracao) {
+  if (duracao >= 6) {
+    return 2000
+  } else {
+    return 1200
+  }
+}
+function agua(duracao) {
+  if (duracao >= 6) {
+    return 1500
+  } else {
+    return 1000
   }
 }
