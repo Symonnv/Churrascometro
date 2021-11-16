@@ -15,6 +15,7 @@ function Calcular() {
     let qntCerveja = cerveja(duracao) * adultos
     let qntAgua = agua(duracao) * adultos + (agua(duracao) / 2) * criancas
 
+    resultado.style.cssText = 'margin-top:10px'
     resultado.innerHTML = `<p>${qntCarne / 1000}Kg de carne</p>`
     resultado.innerHTML += `<p>${Math.ceil(qntCerveja / 355)} latas de cerveja</p>`
     resultado.innerHTML += `<p>${Math.ceil(qntAgua / 2000)} garrafas de água</p>`
